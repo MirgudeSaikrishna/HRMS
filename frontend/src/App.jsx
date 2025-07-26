@@ -8,6 +8,8 @@ import PrivateRoute from "./components/privateRoute";
 import AdminRoute from "./components/adminRoute";
 import ApplyLeave from "./pages/applyLeave";
 import Navbar from "./components/navbar";
+import RealAdmin from "./pages/realAdmin"
+import Home from "./pages/home"
 import { useLocation } from "react-router-dom";
 
 
@@ -16,12 +18,14 @@ function App() {
   const hideNavbar = ["/login", "/register"].includes(location.pathname);
   return (
     <>
-      {hideNavbar && <Navbar />}
+      {!hideNavbar && <Navbar />}
       <Routes>
+        <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/myleaves" element={<MyLeaves />} />
-        <Route path="/admin" element={<AdminPanel />} />
+        <Route path="/manager" element={<AdminPanel />} />
+        <Route path="/admin" element={<RealAdmin/>}/>
         <Route path="/dashboard" element={
           <PrivateRoute><Dashboard /></PrivateRoute>
         } />

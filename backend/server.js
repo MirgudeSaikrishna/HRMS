@@ -6,6 +6,7 @@ const authRoutes = require("./routes/auth");
 const leaveRoutes = require("./routes/leave");
 const holidayRoutes = require("./routes/holiday");
 const adminRoutes = require("./routes/admin");
+const realadminroutes=require("./routes/realadmin")
 
 dotenv.config();
 
@@ -28,6 +29,8 @@ app.use("/api/leave", leaveRoutes);
 app.use("/api/holidays", holidayRoutes);
 
 app.use("/api/admin", adminRoutes);
+
+app.use("/api/admin", realadminroutes)
 
 
 

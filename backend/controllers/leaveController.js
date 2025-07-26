@@ -1,7 +1,8 @@
 const LeaveRequest = require("../models/leaveRequest");
 const User = require("../models/user");
+// const nodemailer = require("nodemailer");
 
-// Apply for Leave
+
 exports.applyLeave = async (req, res) => {
   try {
     const { leaveType, startDate, endDate, reason } = req.body;
@@ -36,11 +37,51 @@ exports.applyLeave = async (req, res) => {
     });
 
     await leave.save();
+
+    // const user = await User.findById(userId);
+    // const manager = await User.findOne({ role: "Manager" });
+    // if (manager && manager.email) {
+    //   // Configure transporter (use your SMTP credentials)
+    //   const transporter = nodemailer.createTransport({
+    //     service: "gmail",
+    //     auth: {
+    //       user: process.env.SMTP_USER, // your email
+    //       pass: process.env.SMTP_PASS, // your app password
+    //     },
+    //   });
+
+    //   const mailOptions = {
+    //     from: process.env.SMTP_USER,
+    //     to: manager.email,
+    //     subject: "New Leave Application Submitted",
+    //     html: `
+    //       <p>Dear Manager,</p>
+    //       <p>User <b>${user.name}</b> (${user.email}) has applied for leave:</p>
+    //       <ul>
+    //         <li><b>Type:</b> ${leaveType}</li>
+    //         <li><b>From:</b> ${new Date(startDate).toLocaleDateString()}</li>
+    //         <li><b>To:</b> ${new Date(endDate).toLocaleDateString()}</li>
+    //         <li><b>Reason:</b> ${reason}</li>
+    //       </ul>
+    //       <p>Please review in the HRMS portal.</p>
+    //     `,
+    //   };
+
+    //   transporter.sendMail(mailOptions, (error, info) => {
+    //     if (error) {
+    //       console.error("Error sending mail to manager:", error);
+    //     }
+    //   });
+    // }
+    // --- End Email ---
+
     res.status(201).json({ message: "Leave applied", leave });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
+
+// ...existing code...
 
 // Get Logged-in User’s Leaves
 exports.getMyLeaves = async (req, res) => {
