@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
   leaveQuota: {
     Sick: { type: Number, default: 5 },
     Casual: { type: Number, default: 5 },
-    Vacation: { type: Number, default: 5 }
+    Vacation: { type: Number, default: 5 },
+    lop: { type: Number, default: 0 }
   }
 }, { timestamps: true });
 
